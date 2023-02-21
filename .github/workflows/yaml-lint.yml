@@ -1,9 +1,9 @@
-name: ansible-lint
+name: yaml-lint
 on: [push, pull_request]
 
 jobs:
   build:
-    name: Ansible Lint
+    name: YAML Lint
     runs-on: ubuntu-22.04
 
     steps:
