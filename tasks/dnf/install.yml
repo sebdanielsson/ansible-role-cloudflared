@@ -1,3 +1,4 @@
+---
 - name: Install dnf dependencies
   become: true
   ansible.builtin.dnf:
@@ -14,7 +15,7 @@
     gpgcheck: true
     gpgkey: https://pkg.cloudflare.com/cloudflare-ascii-pubkey.gpg
     state: present
----
+
 - name: Install cloudflared
   become: true
   ansible.builtin.dnf:
