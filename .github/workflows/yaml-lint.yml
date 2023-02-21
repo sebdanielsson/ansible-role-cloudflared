@@ -17,3 +17,5 @@ jobs:
 
       - name: YAML Lint
         uses: ibiqlik/action-yamllint@v3.1.1
+        with:
+          yamllint_config_filepath: sebdanielsson.cloudflared/.yamllint
