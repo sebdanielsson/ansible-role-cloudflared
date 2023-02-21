@@ -7,9 +7,13 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v3.3.0
+      - name: Check out the codebase
+        uses: actions/checkout@v3.3.0
         with:
+          path: 'sebdanielsson.cloudflared'
           fetch-depth: 0
 
       - name: Run ansible-lint
         uses: ansible/ansible-lint-action@v6.11.0
+        with:
+          path: "sebdanielsson.cloudflared"
