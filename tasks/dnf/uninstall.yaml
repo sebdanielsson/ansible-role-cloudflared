@@ -1,0 +1,11 @@
+- name: Uninstall cloudflared
+  become: true
+  ansible.builtin.dnf:
+    name: cloudflared
+    state: absent
+
+- name: Remove cloudflared repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: cloudflared-stable
+    state: absent

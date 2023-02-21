@@ -1,0 +1,19 @@
+- name: Uninstall cloudflared
+  become: true
+  ansible.builtin.apt:
+    name:
+      - cloudflared
+    state: absent
+
+- name: Remove cloudflared repository
+  become: true
+  ansible.builtin.apt_repository:
+    filename: cloudflared.list
+    repo: "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared {{ ansible_distribution_release }} main"
+    state: absent
+
+- name: Remove cloudflared repository keyring
+  become: true
+  ansible.builtin.file:
+    path: /usr/share/keyrings/cloudflare-main.gpg
+    state: absent

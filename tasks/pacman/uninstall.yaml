@@ -1,0 +1,5 @@
+- name: Uninstall cloudflared
+  become: true
+  community.general.pacman:
+    name: cloudflared
+    state: absent

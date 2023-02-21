@@ -1,0 +1,46 @@
+galaxy_info:
+  role_name: cloudflared
+  author: Sebastian Danielsson
+  description: Install cloudflared (Cloudflare Zero Access Tunnel) on Debian, RedHat and Archlinux family systems. It can also create a service and bring up the connection to Cloudflare if a credential is provided.
+  license: license (MIT)
+
+  min_ansible_version: "2.12"
+
+  # https://galaxy.ansible.com/api/v1/platforms/
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+        - bookworm
+        - sid
+
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+
+    - name: Fedora
+      versions:
+        - "36"
+        - "37"
+
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+
+    - name: ArchLinux
+      versions:
+        - all
+
+  galaxy_tags:
+    - cloudflared
+    - cloudflare
+    - tunnel
+    - zero
+    - access
+    - argo
+    - networking
+
+dependencies: []
