@@ -1,11 +1,11 @@
 - name: Install | Apt
   when: ansible_distribution == 'Debian'
-  ansible.builtin.include_tasks: apt/install.yaml
+  ansible.builtin.include_tasks: apt/install.yml
 
 - name: Install | Dnf
   when: ansible_distribution == 'RedHat'
-  ansible.builtin.include_tasks: dnf/install.yaml
+  ansible.builtin.include_tasks: dnf/install.yml
 
 - name: Install | Pacman
   when: ansible_distribution == 'Archlinux'
-  ansible.builtin.include_tasks: pacman/install.yaml
+  ansible.builtin.include_tasks: pacman/install.yml

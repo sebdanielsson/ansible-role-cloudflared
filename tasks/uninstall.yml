@@ -1,11 +1,11 @@
 - name: Uninstall | Apt
   when: ansible_distribution == 'Debian'
-  ansible.builtin.include_tasks: apt/uninstall.yaml
+  ansible.builtin.include_tasks: apt/uninstall.yml
 
 - name: Uninstall | Dnf
   when: ansible_distribution == 'RedHat'
-  ansible.builtin.include_tasks: dnf/uninstall.yaml
+  ansible.builtin.include_tasks: dnf/uninstall.yml
 
 - name: Uninstall | Pacman
   when: ansible_distribution == 'Archlinux'
-  ansible.builtin.include_tasks: pacman/uninstall.yaml
+  ansible.builtin.include_tasks: pacman/uninstall.yml

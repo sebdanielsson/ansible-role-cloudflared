@@ -8,11 +8,11 @@
 
 - name: Uninstall cloudflared
   when: state == "absent"
-  ansible.builtin.include_tasks: uninstall.yaml
+  ansible.builtin.include_tasks: uninstall.yml
 
 - name: Install cloudflared
   when: state == "present" or state == "latest"
-  ansible.builtin.include_tasks: install.yaml
+  ansible.builtin.include_tasks: install.yml
 
 - name: Create cloudflared service
   become: true
