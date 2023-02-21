@@ -1,3 +1,4 @@
+---
 name: yaml-lint
 on: [push, pull_request]
 

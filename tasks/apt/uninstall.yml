@@ -1,3 +1,4 @@
+---
 - name: Uninstall cloudflared
   become: true
   ansible.builtin.apt:

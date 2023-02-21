@@ -1,3 +1,4 @@
+---
 - name: Install cloudflared
   become: true
   community.general.pacman:

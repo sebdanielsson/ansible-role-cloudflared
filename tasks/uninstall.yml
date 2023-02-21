@@ -1,3 +1,4 @@
+---
 - name: Uninstall | Apt
   when: ansible_distribution == 'Debian'
   ansible.builtin.include_tasks: apt/uninstall.yml

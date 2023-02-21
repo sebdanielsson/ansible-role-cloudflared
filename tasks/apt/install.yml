@@ -1,3 +1,4 @@
+---
 - name: Add cloudflared repository keyring
   become: true
   ansible.builtin.get_url:

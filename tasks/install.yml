@@ -1,3 +1,4 @@
+---
 - name: Install | Apt
   when: ansible_distribution == 'Debian'
   ansible.builtin.include_tasks: apt/install.yml
