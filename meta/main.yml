@@ -1,7 +1,8 @@
 galaxy_info:
   role_name: cloudflared
+  namespace: sebdanielsson
   author: Sebastian Danielsson
-  description: Install cloudflared (Cloudflare Zero Access Tunnel) on Debian, RedHat and Archlinux family systems. It can also create a service and bring up the connection to Cloudflare if a credential is provided.
+  description: Install and configure cloudflared (Cloudflare Zero Access Tunnel) on Debian, RedHat and Archlinux family systems.
   license: license (MIT)
 
   min_ansible_version: "2.12"
