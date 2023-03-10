@@ -16,7 +16,7 @@
 
 - name: Create cloudflared service
   become: true
-  when: (state == "present" or state == "latest") and cloudflare_tunnel_enable
+  when: cloudflare_tunnel_enable | bool == true
   ansible.builtin.command:
     cmd: "cloudflared service install {{ cloudflare_tunnel_credential }}"
     creates: /etc/systemd/system/cloudflared.service
