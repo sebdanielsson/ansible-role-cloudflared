@@ -10,14 +10,14 @@
     signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
   state: present
 
-#- name: Add cloudflared repository keyring
+# - name: Add cloudflared repository keyring
 #  become: true
 #  ansible.builtin.get_url:
 #    url: https://pkg.cloudflare.com/cloudflare-main.gpg
 #    dest: /usr/share/keyrings/cloudflare-main.gpg
 #    mode: 0644
 
-#- name: Add cloudflared repository
+# - name: Add cloudflared repository
 #  become: true
 #  ansible.builtin.apt_repository:
 #    filename: cloudflared.list
