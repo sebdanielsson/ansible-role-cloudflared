@@ -13,4 +13,4 @@ jobs:
           fetch-depth: 0
 
       - name: Ansible Lint
-        uses: ansible/ansible-lint-action@v6.15.0
+        uses: ansible/ansible-lint-action@v6.16.0
