@@ -6,15 +6,25 @@
       - cloudflared
     state: absent
 
-- name: Remove cloudflared repository
+- name: Remove cloudflared repository testing
   become: true
-  ansible.builtin.apt_repository:
-    filename: cloudflared.list
-    repo: "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared {{ ansible_distribution_release }} main"
-    state: absent
+  ansible.builtin.deb822_repository:
+    name: cloudflared
+    types: deb
+    uris: https://pkg.cloudflare.com/cloudflared
+    suites: '{{ ansible_distribution_release }}'
+    components: main
+    signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
+  state: absent
+#- name: Remove cloudflared repository
+#  become: true
+#  ansible.builtin.apt_repository:
+#    filename: cloudflared.list
+#    repo: "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared {{ ansible_distribution_release }} main"
+#    state: absent
 
-- name: Remove cloudflared repository keyring
-  become: true
-  ansible.builtin.file:
-    path: /usr/share/keyrings/cloudflare-main.gpg
-    state: absent
+#- name: Remove cloudflared repository keyring
+#  become: true
+#  ansible.builtin.file:
+#    path: /usr/share/keyrings/cloudflare-main.gpg
+#    state: absent

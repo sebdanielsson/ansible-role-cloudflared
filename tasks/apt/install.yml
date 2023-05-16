@@ -1,17 +1,28 @@
 ---
-- name: Add cloudflared repository keyring
+- name: Add cloudflared repository testing
   become: true
-  ansible.builtin.get_url:
-    url: https://pkg.cloudflare.com/cloudflare-main.gpg
-    dest: /usr/share/keyrings/cloudflare-main.gpg
-    mode: 0644
+  ansible.builtin.deb822_repository:
+    name: cloudflared
+    types: deb
+    uris: https://pkg.cloudflare.com/cloudflared
+    suites: '{{ ansible_distribution_release }}'
+    components: main
+    signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
+  state: present
 
-- name: Add cloudflared repository
-  become: true
-  ansible.builtin.apt_repository:
-    filename: cloudflared.list
-    repo: "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared {{ ansible_distribution_release }} main"
-    state: present
+#- name: Add cloudflared repository keyring
+#  become: true
+#  ansible.builtin.get_url:
+#    url: https://pkg.cloudflare.com/cloudflare-main.gpg
+#    dest: /usr/share/keyrings/cloudflare-main.gpg
+#    mode: 0644
+
+#- name: Add cloudflared repository
+#  become: true
+#  ansible.builtin.apt_repository:
+#    filename: cloudflared.list
+#    repo: "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared {{ ansible_distribution_release }} main"
+#    state: present
 
 - name: Install cloudflared
   become: true
