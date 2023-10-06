@@ -1,15 +1,4 @@
 ---
-- name: Delete cloudflared service
-  become: true
-  when: not cloudflare_tunnel_enable or state == "absent"
-  ansible.builtin.command:
-    cmd: "cloudflared service uninstall"
-    removes: /etc/systemd/system/cloudflared.service
-
-- name: Uninstall cloudflared
-  when: state == "absent"
-  ansible.builtin.include_tasks: uninstall.yml
-
 - name: Install cloudflared
   when: state == "present" or state == "latest"
   ansible.builtin.include_tasks: install.yml
@@ -18,5 +7,16 @@
   become: true
   when: cloudflare_tunnel_enable and (state == "present" or state == "latest")
   ansible.builtin.command:
-    cmd: "cloudflared service install {{ cloudflare_tunnel_credential }}"
+    cmd: 'cloudflared service install {{ cloudflare_tunnel_credential }}'
     creates: /etc/systemd/system/cloudflared.service
+
+- name: Delete cloudflared service
+  become: true
+  when: not cloudflare_tunnel_enable or state == "absent"
+  ansible.builtin.command:
+    cmd: 'cloudflared service uninstall'
+    removes: /etc/systemd/system/cloudflared.service
+
+- name: Uninstall cloudflared
+  when: state == "absent"
+  ansible.builtin.include_tasks: uninstall.yml
