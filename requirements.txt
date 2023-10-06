@@ -1,1 +1,3 @@
 ansible-core==2.15.4
+molecule==6.0.2
+docker==6.1.3
