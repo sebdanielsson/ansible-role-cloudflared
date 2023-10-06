@@ -60,7 +60,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Molecule tests
-        run: molecule test
+        run: molecule test -s install && molecule test -s uninstall
         continue-on-error: ${{ matrix.experimental }}
         env:
           PY_COLORS: '1'

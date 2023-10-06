@@ -1,0 +1,6 @@
+---
+- name: Install cloudflared
+  hosts: all
+  roles:
+    - role: sebdanielsson.cloudflared
+      state: absent
