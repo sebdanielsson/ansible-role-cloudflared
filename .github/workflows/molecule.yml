@@ -23,25 +23,25 @@ jobs:
             playbook: converge.yml
             experimental: false
 
-          #- docker_image: ubuntu
-          #  docker_tag: 22.04
-          #  playbook: converge.yml
-          #  experimental: false
+          - docker_image: ubuntu
+            docker_tag: 22.04
+            playbook: converge.yml
+            experimental: false
 
-          #- docker_image: fedora
-          #  docker_tag: '38'
-          #  playbook: converge.yml
-          #  experimental: false
+          - docker_image: fedora
+            docker_tag: '38'
+            playbook: converge.yml
+            experimental: false
 
-          #- docker_image: ubi9
-          #  docker_tag: '9.2'
-          #  playbook: converge.yml
-          #  experimental: false
+          - docker_image: ubi9
+            docker_tag: '9.2'
+            playbook: converge.yml
+            experimental: false
 
-          #- docker_image: archlinux
-          #  docker_tag: 'base'
-          #  playbook: converge.yml
-          #  experimental: false
+          - docker_image: archlinux
+            docker_tag: 'base'
+            playbook: converge.yml
+            experimental: false
 
     steps:
       - name: Check out the codebase
