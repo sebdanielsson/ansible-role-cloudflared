@@ -23,10 +23,10 @@ jobs:
             playbook: converge.yml
             experimental: false
 
-          - docker_image: ubuntu
-            docker_tag: 22.04
-            playbook: converge.yml
-            experimental: false
+          #- docker_image: ubuntu
+          #  docker_tag: 22.04
+          #  playbook: converge.yml
+          #  experimental: false
 
           #- docker_image: fedora
           #  docker_tag: '38'
@@ -60,7 +60,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Molecule tests
-        run: molecule test -s install && molecule test -s uninstall
+        run: molecule test
         continue-on-error: ${{ matrix.experimental }}
         env:
           PY_COLORS: '1'

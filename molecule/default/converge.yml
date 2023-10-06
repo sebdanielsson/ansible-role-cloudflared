@@ -1,6 +1,6 @@
 ---
-- name: Install cloudflared
+- name: Converge
   hosts: all
+  become: true
   roles:
     - role: sebdanielsson.cloudflared
-      state: absent
