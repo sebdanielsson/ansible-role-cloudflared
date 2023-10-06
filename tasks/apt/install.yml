@@ -2,8 +2,8 @@
 - name: Ensure python3-debian is installed
   become: true
   ansible.builtin.apt:
-    name:
-      - python3-debian
+    name: python3-debian
+    update_cache: true
     state: present
 
 - name: Add cloudflared repository
