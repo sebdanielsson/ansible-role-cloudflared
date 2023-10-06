@@ -54,10 +54,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      # Check if Docker is installed
-      - name: Check if Docker is installed
-        run: docker --version
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
