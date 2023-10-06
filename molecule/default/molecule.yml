@@ -9,7 +9,7 @@ driver:
 
 platforms:
   - name: instance
-    image: ${MOLECULE_DOCKER_IMAGE:-ubuntu}:${MOLECULE_DOCKER_TAG:-latest}'
+    image: ${MOLECULE_DOCKER_IMAGE:-ubuntu}:${MOLECULE_DOCKER_TAG:-latest}
     cgroupns_mode: host
 
 provisioner:
