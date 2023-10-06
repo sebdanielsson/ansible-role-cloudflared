@@ -11,7 +11,6 @@
     - name: Include role to install cloudflared
       ansible.builtin.include_role:
         name: sebdanielsson.cloudflared
-      vars:
         state: present
 
     # Include some tasks here to verify the installation,
@@ -21,5 +20,4 @@
     - name: Include role to uninstall cloudflared
       ansible.builtin.include_role:
         name: sebdanielsson.cloudflared
-      vars:
         state: absent
