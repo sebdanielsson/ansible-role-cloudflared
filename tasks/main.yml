@@ -1,6 +1,5 @@
 ---
 - name: Install cloudflared
-  state: present
   when: state == "present" or state == "latest"
   ansible.builtin.include_tasks: install.yml
 
