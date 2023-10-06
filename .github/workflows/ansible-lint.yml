@@ -1,6 +1,11 @@
 ---
 name: ansible-lint
-'on': [push, pull_request]
+
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
