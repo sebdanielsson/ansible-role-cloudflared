@@ -4,4 +4,4 @@
   become: true
 
   roles:
-    - sebdanielsson.cloudflared
+    - role: sebdanielsson.cloudflared
