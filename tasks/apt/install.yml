@@ -20,6 +20,6 @@
 - name: Install cloudflared
   become: true
   ansible.builtin.apt:
-    name:
-      - cloudflared
+    name: cloudflared
+    update_cache: true
     state: present
