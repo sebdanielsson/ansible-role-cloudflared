@@ -18,10 +18,10 @@ jobs:
     strategy:
       matrix:
         include:
-          #- docker_image: debian
-          #  docker_tag: '12'
-          #  playbook: converge.yml
-          #  experimental: false
+          - docker_image: debian
+            docker_tag: '12'
+            playbook: converge.yml
+            experimental: false
 
           - docker_image: ubuntu
             docker_tag: 22.04
