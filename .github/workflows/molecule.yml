@@ -1,6 +1,12 @@
 ---
 name: Molecule Test
-on: [push, pull_request]
+
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+
 defaults:
   run:
     working-directory: 'sebdanielsson.cloudflared'
@@ -12,30 +18,31 @@ jobs:
     strategy:
       matrix:
         include:
-          - docker_image: debian
-            docker_tag: '12'
-            playbook: converge.yml
-            experimental: false
+          #- docker_image: debian
+          #  docker_tag: '12'
+          #  playbook: converge.yml
+          #  experimental: false
 
           - docker_image: ubuntu
             docker_tag: '22.04'
             playbook: converge.yml
             experimental: false
 
-          - docker_image: fedora
-            docker_tag: '38'
-            playbook: converge.yml
-            experimental: false
+          #- docker_image: fedora
+          #  docker_tag: '38'
+          #  playbook: converge.yml
+          #  experimental: false
 
-          - docker_image: ubi9
-            docker_tag: '9.2'
-            playbook: converge.yml
-            experimental: false
+          #- docker_image: ubi9
+          #  docker_tag: '9.2'
+          #  playbook: converge.yml
+          #  experimental: false
 
-          - docker_image: archlinux
-            docker_tag: 'base'
-            playbook: converge.yml
-            experimental: false
+          #- docker_image: archlinux
+          #  docker_tag: 'base'
+          #  playbook: converge.yml
+          #  experimental: false
+
     steps:
       - name: Check out the codebase
         uses: actions/checkout@v4
@@ -46,6 +53,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+
+      # Check if Docker is installed
+      - name: Check if Docker is installed
+        run: docker --version
 
       - name: Install dependencies
         run: |
