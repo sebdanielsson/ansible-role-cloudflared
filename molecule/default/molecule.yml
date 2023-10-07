@@ -16,3 +16,6 @@ provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  config_options:
+    defaults:
+      become_method: su
