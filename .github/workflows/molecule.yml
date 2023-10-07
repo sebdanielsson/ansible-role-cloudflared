@@ -38,9 +38,8 @@ jobs:
             playbook: converge.yml
             experimental: false
 
-          - docker_image: archlinux
+          - docker_image: sebdanielsson/archlinux
             docker_tag: 'base'
-            docker_command: 'pacman -Sy --noconfirm sudo'
             playbook: converge.yml
             experimental: false
 
@@ -68,5 +67,4 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DOCKER_IMAGE: ${{ matrix.docker_image }}
           MOLECULE_DOCKER_TAG: ${{ matrix.docker_tag }}
-          MOLECULE_DOCKER_COMMAND: ${{ matrix.docker_command }}
           MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
