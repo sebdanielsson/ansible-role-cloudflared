@@ -38,10 +38,7 @@ jobs:
             playbook: converge.yml
             experimental: false
 
-          - docker_image: sebdanielsson/archlinux
-            docker_tag: 'base'
-            playbook: converge.yml
-            experimental: false
+          
 
     steps:
       - name: Check out the codebase

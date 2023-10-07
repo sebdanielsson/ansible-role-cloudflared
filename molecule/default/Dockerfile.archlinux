@@ -1,3 +1,0 @@
-FROM archlinux:base
-
-RUN pacman-key --init && pacman -Syu --noconfirm sudo
