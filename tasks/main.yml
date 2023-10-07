@@ -7,7 +7,7 @@
   become: true
   when: cloudflare_tunnel_enable and (state == "present" or state == "latest")
   ansible.builtin.command:
-    cmd: 'cloudflared service install {{ cloudflare_tunnel_credential }}'
+    cmd: "cloudflared service install {{ cloudflare_tunnel_credential }}"
     creates: /etc/systemd/system/cloudflared.service
 
 - name: Delete cloudflared service
