@@ -33,7 +33,7 @@ jobs:
             playbook: converge.yml
             experimental: false
 
-          - docker_image: ubi9
+          - docker_image: redhat/ubi9
             docker_tag: '9.2'
             playbook: converge.yml
             experimental: false
