@@ -1,5 +1,7 @@
 ---
 galaxy_info:
+  role_name: cloudflared
+  namespace: sebdanielsson
   author: sebdanielsson
   description: Install and configure cloudflared (Cloudflare Zero Access Tunnel) on Debian, RedHat and Archlinux family systems.
   license: "license (MIT)"
