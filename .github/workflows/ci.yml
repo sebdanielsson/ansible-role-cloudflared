@@ -1,0 +1,79 @@
+---
+name: CI
+
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    working-directory: 'sebdanielsson.cloudflared'
+
+jobs:
+  lint:
+    name: Run yaml-lint and ansible-lint
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run yaml-lint
+        uses: ibiqlik/action-yamllint@v3.1.1
+
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@v6.20.3
+
+  molecule:
+    name: Molecule Test
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        include:
+          - docker_image: debian
+            docker_tag: '12'
+            playbook: converge.yml
+            experimental: false
+
+          - docker_image: ubuntu
+            docker_tag: 22.04
+            playbook: converge.yml
+            experimental: false
+
+          - docker_image: fedora
+            docker_tag: '38'
+            playbook: converge.yml
+            experimental: false
+
+          - docker_image: redhat/ubi9
+            docker_tag: '9.2'
+            playbook: converge.yml
+            experimental: false
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v4
+        with:
+          path: 'sebdanielsson.cloudflared'
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Molecule tests
+        run: molecule test
+        continue-on-error: ${{ matrix.experimental }}
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DOCKER_IMAGE: ${{ matrix.docker_image }}
+          MOLECULE_DOCKER_TAG: ${{ matrix.docker_tag }}
+          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}

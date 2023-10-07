@@ -1,0 +1,18 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+
+driver:
+  name: docker
+
+platforms:
+  - name: instance
+    image: ${MOLECULE_DOCKER_IMAGE:-ubuntu}:${MOLECULE_DOCKER_TAG:-latest}
+    cgroupns_mode: host
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
