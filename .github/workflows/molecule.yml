@@ -38,8 +38,6 @@ jobs:
             playbook: converge.yml
             experimental: false
 
-          
-
     steps:
       - name: Check out the codebase
         uses: actions/checkout@v4
