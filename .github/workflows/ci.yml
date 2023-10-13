@@ -16,9 +16,8 @@ jobs:
     name: Run yaml-lint and ansible-lint
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Run yaml-lint
         uses: ibiqlik/action-yamllint@v3.1.1
