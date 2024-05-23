@@ -67,12 +67,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Check if Docker is installed
-        run: systemctl status docker
-
-      - name: More Docker info
-        run: docker info
-
       - name: Run Molecule tests
         run: molecule test
         continue-on-error: ${{ matrix.experimental }}
