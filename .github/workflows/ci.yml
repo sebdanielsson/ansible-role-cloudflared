@@ -68,7 +68,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Check if Docker is installed
-        run: docker --version
+        run: systemctl status docker
+
+      - name: More Docker info
+        run: docker info
 
       - name: Run Molecule tests
         run: molecule test
