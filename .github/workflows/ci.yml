@@ -37,17 +37,17 @@ jobs:
             experimental: false
 
           - docker_image: ubuntu
-            docker_tag: 22.04
+            docker_tag: '24.04'
             playbook: converge.yml
             experimental: false
 
           - docker_image: fedora
-            docker_tag: '38'
+            docker_tag: '40'
             playbook: converge.yml
             experimental: false
 
           - docker_image: redhat/ubi9
-            docker_tag: '9.2'
+            docker_tag: '9.4'
             playbook: converge.yml
             experimental: false
 
