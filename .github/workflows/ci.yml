@@ -14,7 +14,7 @@ defaults:
 jobs:
   lint:
     name: Run yaml-lint and ansible-lint
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
 
   molecule:
     name: Molecule Test
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         include:
