@@ -7,4 +7,4 @@ collections:
     version: 1.6.1
 
   - name: community.docker
-    version: 3.13.0
+    version: 3.13.1
