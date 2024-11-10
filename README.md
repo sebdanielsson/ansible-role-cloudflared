@@ -7,10 +7,9 @@ This is my first Ansible role and it's not feature complete. Feel free to send m
 ## Requirements
 
 - systemd init system
-- Debian family systems (Pretty much all currently maintained)
-- RedHat family systems with the dnf package manager
-- Archlinux family systems with pacman
-- ansible-core 2.15.1 due to the usage of the deb822_repository module
+- Debian family systems
+- RedHat family systems with dnf
+- Archlinux family systems with pacman (untested)
 
 ## Role Variables
 
@@ -38,6 +37,6 @@ MIT
 
 ## Author Information
 
-Created by Sebastian Danielsson 2023  
+Created by Sebastian Danielsson 2024  
 GitHub Profile: <https://github.com/sebdanielsson>  
 Website: <https://sebbo.io>
