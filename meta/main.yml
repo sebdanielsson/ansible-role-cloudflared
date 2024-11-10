@@ -4,29 +4,27 @@ galaxy_info:
   author: sebdanielsson
   description: Install and configure cloudflared (Cloudflare Zero Access Tunnel) on Debian, RedHat and Archlinux family systems.
   license: "license (MIT)"
-  min_ansible_version: '2.15.1'
+  min_ansible_version: "2.16.0"
   platforms:
     - name: Debian
       versions:
-        - buster
         - bullseye
         - bookworm
         - sid
 
     - name: Ubuntu
       versions:
-        - focal
         - jammy
+        - noble
 
     - name: Fedora
       versions:
-        - '37'
-        - '38'
+        - "40"
 
     - name: EL
       versions:
-        - '8'
-        - '9'
+        - "8"
+        - "9"
 
     - name: ArchLinux
       versions:
