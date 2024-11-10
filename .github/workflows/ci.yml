@@ -42,7 +42,7 @@ jobs:
             experimental: false
 
           - docker_image: fedora
-            docker_tag: '41'
+            docker_tag: '40'
             playbook: converge.yml
             experimental: false
 
