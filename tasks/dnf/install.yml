@@ -5,6 +5,19 @@
     name: dnf-plugins-core
     update_cache: true
     state: present
+  register: dnf_dependencies_install
+  ignore_errors: true
+
+- name: Check for python3-libdnf5 error
+  ansible.builtin.debug:
+    msg: "Missing python3-libdnf5. Installing it now."
+  when: "'python3-libdnf5' in dnf_dependencies_install.msg"
+
+- name: Install python3-libdnf5 # noqa: no-changed-when
+  become: true
+  ansible.builtin.command:
+    cmd: "dnf install -y python3-libdnf5 dnf-plugins-core"
+  when: "'python3-libdnf5' in dnf_dependencies_install.msg"
 
 - name: Add cloudflared repository
   become: true
