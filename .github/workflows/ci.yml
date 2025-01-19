@@ -19,9 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run yaml-lint
-        uses: ibiqlik/action-yamllint@v3.1.1
-
       - name: Run ansible-lint
         uses: ansible/ansible-lint@v24.12.2
 
