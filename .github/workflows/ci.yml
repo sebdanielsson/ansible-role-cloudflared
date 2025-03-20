@@ -34,7 +34,7 @@ jobs:
             experimental: false
 
           - docker_image: ubuntu
-            docker_tag: '22.04'
+            docker_tag: '24.04'
             playbook: converge.yml
             experimental: false
 
