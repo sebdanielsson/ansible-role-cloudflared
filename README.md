@@ -39,4 +39,4 @@ MIT
 
 Created by Sebastian Danielsson 2024  
 GitHub Profile: <https://github.com/sebdanielsson>  
-Website: <https://sebbo.io>
+Website: <https://sebdanielsson.dev>
