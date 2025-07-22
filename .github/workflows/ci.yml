@@ -45,12 +45,12 @@ jobs:
             experimental: false
 
           - docker_image: fedora
-            docker_tag: '41'
+            docker_tag: '42'
             playbook: converge.yml
             experimental: false
 
           - docker_image: redhat/ubi9
-            docker_tag: '9.4'
+            docker_tag: '9.6'
             playbook: converge.yml
             experimental: false
 
