@@ -2,6 +2,8 @@
 #  Thank you to https://github.com/geerlingguy for this awesome action.
 
 name: Release
+permissions:
+  contents: read
 'on':
   push:
     tags:
