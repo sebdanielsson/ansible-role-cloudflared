@@ -24,6 +24,9 @@ jobs:
 
       - name: Run ansible-lint
         uses: ansible/ansible-lint@v25.6.1
+        with:
+          setup_python: "true"
+          requirements_file: "requirements.yml"
 
   molecule:
     name: Molecule Test
