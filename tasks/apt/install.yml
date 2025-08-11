@@ -6,6 +6,18 @@
     update_cache: true
     state: present
 
+- name: Add cloudflared repository for Debian 13 (experimental)
+  become: true
+  ansible.builtin.deb822_repository:
+    name: cloudflare
+    types: deb
+    uris: https://pkg.cloudflare.com/cloudflared
+    suites: any
+    components: main
+    signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
+    state: present
+  when: ansible_facts['distribution'] == 'Debian' and ansible_facts['distribution_major_version'] is version('13', '>=')
+
 - name: Add cloudflared repository
   become: true
   ansible.builtin.deb822_repository:
@@ -16,6 +28,7 @@
     components: main
     signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
     state: present
+  when: ansible_facts['distribution'] == 'Debian' and ansible_facts['distribution_major_version'] is version('13', '<')
 
 - name: Install cloudflared
   become: true
