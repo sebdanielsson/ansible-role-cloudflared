@@ -42,7 +42,7 @@ jobs:
           - docker_image: debian
             docker_tag: '13'
             playbook: converge.yml
-            experimental: false
+            experimental: true
 
           - docker_image: ubuntu
             docker_tag: '24.04'
