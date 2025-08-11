@@ -16,3 +16,15 @@
     components: main
     signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
     state: absent
+
+- name: Remove cloudflared repository for Debian 13 (experimental)
+  become: true
+  ansible.builtin.deb822_repository:
+    name: cloudflared
+    types: deb
+    uris: https://pkg.cloudflare.com/cloudflared
+    suites: any
+    components: main
+    signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
+    state: absent
+  when: ansible_facts['distribution'] == 'Debian' and ansible_facts['distribution_major_version'] is version('13', '>=')
