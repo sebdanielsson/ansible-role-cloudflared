@@ -6,17 +6,16 @@
     update_cache: true
     state: present
 
-- name: Add cloudflared repository for Debian 13 (experimental)
+- name: Remove deprecated flavor-specific cloudflared repository
   become: true
   ansible.builtin.deb822_repository:
     name: cloudflare
     types: deb
     uris: https://pkg.cloudflare.com/cloudflared
-    suites: any
+    suites: "{{ ansible_distribution_release }}"
     components: main
     signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
-    state: present
-  when: ansible_facts['distribution'] == 'Debian' and ansible_facts['distribution_major_version'] is version('13', '>=')
+    state: absent
 
 - name: Add cloudflared repository
   become: true
@@ -24,7 +23,7 @@
     name: cloudflare
     types: deb
     uris: https://pkg.cloudflare.com/cloudflared
-    suites: '{{ ansible_distribution_release }}'
+    suites: any
     components: main
     signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
     state: present
