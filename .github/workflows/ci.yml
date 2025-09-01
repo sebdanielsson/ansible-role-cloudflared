@@ -35,14 +35,9 @@ jobs:
       matrix:
         include:
           - docker_image: debian
-            docker_tag: '12'
-            playbook: converge.yml
-            experimental: false
-
-          - docker_image: debian
             docker_tag: '13'
             playbook: converge.yml
-            experimental: true
+            experimental: false
 
           - docker_image: ubuntu
             docker_tag: '24.04'
@@ -92,7 +87,7 @@ jobs:
       matrix:
         include:
           - docker_image: debian
-            docker_tag: '12'
+            docker_tag: '13'
             experimental: false
 
           - docker_image: ubuntu
