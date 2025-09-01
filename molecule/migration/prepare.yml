@@ -5,7 +5,7 @@
   tasks:
     - name: Install required packages
       ansible.builtin.apt:
-        name: 
+        name:
           - python3-debian
           - gnupg
         update_cache: true
