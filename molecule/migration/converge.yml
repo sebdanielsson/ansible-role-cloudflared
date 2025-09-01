@@ -1,0 +1,7 @@
+---
+- name: Converge - Test migration from flavor-specific to any suite
+  hosts: all
+  become: true
+  roles:
+    - role: sebdanielsson.cloudflared
+      state: present  # noqa: var-naming[no-role-prefix]
