@@ -17,13 +17,18 @@
     signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
     state: absent
 
-- name: Remove deprecated flavor-specific cloudflared repository
+- name: Check if cloudflare repository exists but is not using 'any' suite
   become: true
-  ansible.builtin.deb822_repository:
-    name: cloudflare
-    types: deb
-    uris: https://pkg.cloudflare.com/cloudflared
-    suites: "{{ ansible_distribution_release }}"
-    components: main
-    signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
+  ansible.builtin.slurp:
+    path: "/etc/apt/sources.list.d/cloudflare.sources"
+  register: cloudflare_repo_content
+  failed_when: false
+
+- name: Remove deprecated cloudflare repository (not using 'any' suite)
+  become: true
+  ansible.builtin.file:
+    path: "/etc/apt/sources.list.d/cloudflare.sources"
     state: absent
+  when:
+    - cloudflare_repo_content.content is defined
+    - '"Suites: any" not in (cloudflare_repo_content.content | b64decode)'

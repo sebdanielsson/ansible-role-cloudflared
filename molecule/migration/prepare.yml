@@ -1,0 +1,39 @@
+---
+- name: Prepare - Setup deprecated flavor-specific repository
+  hosts: all
+  become: true
+  tasks:
+    - name: Install required packages
+      ansible.builtin.apt:
+        name: 
+          - python3-debian
+          - gnupg
+        update_cache: true
+        state: present
+
+    - name: Create deprecated cloudflare repository (flavor-specific)
+      ansible.builtin.deb822_repository:
+        name: cloudflare
+        types: deb
+        uris: https://pkg.cloudflare.com/cloudflared
+        suites: "{{ ansible_distribution_release }}"
+        components: main
+        signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
+        state: present
+
+    - name: Verify deprecated repository is created with flavor-specific suite
+      ansible.builtin.slurp:
+        path: "/etc/apt/sources.list.d/cloudflare.sources"
+      register: deprecated_repo
+
+    - name: Debug deprecated repository content
+      ansible.builtin.debug:
+        msg: "Deprecated repo contains: {{ deprecated_repo.content | b64decode }}"
+
+    - name: Assert deprecated repository uses distribution-specific suite
+      ansible.builtin.assert:
+        that:
+          - '"Suites: any" not in (deprecated_repo.content | b64decode)'
+          - 'ansible_distribution_release in (deprecated_repo.content | b64decode)'
+        fail_msg: "Deprecated repository was not set up correctly"
+        success_msg: "Deprecated repository with flavor-specific suite created successfully"

@@ -1,0 +1,54 @@
+---
+- name: Verify - Migration to 'any' suite successful
+  hosts: all
+  become: true
+  tasks:
+    - name: Check that cloudflare repository file exists
+      ansible.builtin.stat:
+        path: "/etc/apt/sources.list.d/cloudflare.sources"
+      register: cloudflare_sources
+
+    - name: Read cloudflare repository content
+      ansible.builtin.slurp:
+        path: "/etc/apt/sources.list.d/cloudflare.sources"
+      register: cloudflare_repo
+      when: cloudflare_sources.stat.exists
+
+    - name: Debug repository content after migration
+      ansible.builtin.debug:
+        msg: "Repository content: {{ cloudflare_repo.content | b64decode }}"
+      when: cloudflare_sources.stat.exists
+
+    - name: Verify repository now uses 'any' suite
+      ansible.builtin.assert:
+        that:
+          - cloudflare_sources.stat.exists
+          - '"Suites: any" in (cloudflare_repo.content | b64decode)'
+          - '"https://pkg.cloudflare.com/cloudflared" in (cloudflare_repo.content | b64decode)'
+          - '"Components: main" in (cloudflare_repo.content | b64decode)'
+        fail_msg: "Repository migration failed - does not contain 'Suites: any'"
+        success_msg: "Repository successfully migrated to use 'any' suite"
+
+    - name: Verify cloudflared package is installable
+      ansible.builtin.apt:
+        name: cloudflared
+        state: present
+        update_cache: true
+
+    - name: Verify cloudflared is installed
+      ansible.builtin.command:
+        cmd: cloudflared --version
+      register: cloudflared_version
+      changed_when: false
+
+    - name: Debug cloudflared version
+      ansible.builtin.debug:
+        msg: "Cloudflared version: {{ cloudflared_version.stdout }}"
+
+    - name: Verify cloudflared version output is not empty
+      ansible.builtin.assert:
+        that:
+          - cloudflared_version.stdout is defined
+          - cloudflared_version.stdout | length > 0
+        fail_msg: "Cloudflared is not properly installed"
+        success_msg: "Cloudflared is successfully installed and working"

@@ -84,3 +84,42 @@ jobs:
           MOLECULE_DOCKER_IMAGE: ${{ matrix.docker_image }}
           MOLECULE_DOCKER_TAG: ${{ matrix.docker_tag }}
           MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
+
+  migration-test:
+    name: Migration Test
+    runs-on: ubuntu-24.04-arm
+    strategy:
+      matrix:
+        include:
+          - docker_image: debian
+            docker_tag: '12'
+            experimental: false
+
+          - docker_image: ubuntu
+            docker_tag: '24.04'
+            experimental: false
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v5
+        with:
+          path: 'sebdanielsson.cloudflared'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Migration Molecule tests
+        run: molecule test -s migration
+        continue-on-error: ${{ matrix.experimental }}
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DOCKER_IMAGE: ${{ matrix.docker_image }}
+          MOLECULE_DOCKER_TAG: ${{ matrix.docker_tag }}
