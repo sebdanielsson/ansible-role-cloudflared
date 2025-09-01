@@ -87,7 +87,7 @@ jobs:
       matrix:
         include:
           - docker_image: debian
-            docker_tag: '13'
+            docker_tag: '12'  # Latest possible because of migration from flavor-specific to any suite
             experimental: false
 
           - docker_image: ubuntu
