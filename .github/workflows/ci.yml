@@ -71,7 +71,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Molecule tests
-        run: molecule test
+        run: molecule test --shared-state
         continue-on-error: ${{ matrix.experimental }}
         env:
           PY_COLORS: '1'
