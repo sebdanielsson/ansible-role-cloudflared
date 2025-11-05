@@ -62,12 +62,8 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
-
-      - name: Set up Python
-        run: |
-          uv venv
-          source .venv/bin/activate
-          uv python install
+        with:
+          activate-environment: "true"
 
       - name: Install dependencies
         run: uv pip install -r requirements.txt
@@ -104,12 +100,8 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
-
-      - name: Set up Python
-        run: |
-          uv venv
-          source .venv/bin/activate
-          uv python install
+        with:
+          activate-environment: "true"
 
       - name: Install dependencies
         run: uv pip install -r requirements.txt
