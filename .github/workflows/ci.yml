@@ -66,6 +66,7 @@ jobs:
       - name: Set up Python
         run: |
           uv venv
+          source .venv/bin/activate
           uv python install
 
       - name: Install dependencies
@@ -107,6 +108,7 @@ jobs:
       - name: Set up Python
         run: |
           uv venv
+          source .venv/bin/activate
           uv python install
 
       - name: Install dependencies
