@@ -16,7 +16,7 @@
         name: cloudflare
         types: deb
         uris: https://pkg.cloudflare.com/cloudflared
-        suites: "{{ ansible_distribution_release }}"
+        suites: "{{ ansible_facts.distribution_release }}"
         components: main
         signed_by: https://pkg.cloudflare.com/cloudflare-main.gpg
         state: present
