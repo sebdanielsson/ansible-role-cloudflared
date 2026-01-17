@@ -4,4 +4,4 @@
   become: true
   roles:
     - role: sebdanielsson.cloudflared
-      state: present  # noqa: var-naming[no-role-prefix]
+      state: present # noqa: var-naming[no-role-prefix]

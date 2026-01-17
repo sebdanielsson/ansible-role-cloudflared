@@ -4,7 +4,7 @@ name: CI
 permissions:
   contents: read
 
-'on':
+on:
   pull_request:
   push:
     branches:
@@ -12,7 +12,7 @@ permissions:
 
 defaults:
   run:
-    working-directory: 'sebdanielsson.cloudflared'
+    working-directory: sebdanielsson.cloudflared
 
 jobs:
   lint:
@@ -25,8 +25,11 @@ jobs:
       - name: Run ansible-lint
         uses: ansible/ansible-lint@v26.1.1
         with:
-          setup_python: "true"
-          requirements_file: "requirements.yml"
+          setup_python: true
+          requirements_file: requirements.yml
+
+      - name: Run format check
+        run: npx oxfmt --check
 
   molecule:
     name: Molecule Test
@@ -35,22 +38,22 @@ jobs:
       matrix:
         include:
           - docker_image: debian
-            docker_tag: '13'
+            docker_tag: "13"
             playbook: converge.yml
             experimental: false
 
           - docker_image: ubuntu
-            docker_tag: '24.04'
+            docker_tag: "24.04"
             playbook: converge.yml
             experimental: false
 
           - docker_image: fedora
-            docker_tag: '42'
+            docker_tag: "42"
             playbook: converge.yml
             experimental: false
 
           - docker_image: redhat/ubi9
-            docker_tag: '9.6'
+            docker_tag: "9.6"
             playbook: converge.yml
             experimental: false
 
@@ -58,12 +61,12 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v6
         with:
-          path: 'sebdanielsson.cloudflared'
+          path: sebdanielsson.cloudflared
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
-          activate-environment: "true"
+          activate-environment: true
 
       - name: Install dependencies
         run: uv pip install -r requirements.txt
@@ -72,8 +75,8 @@ jobs:
         run: molecule test
         continue-on-error: ${{ matrix.experimental }}
         env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
           MOLECULE_DOCKER_IMAGE: ${{ matrix.docker_image }}
           MOLECULE_DOCKER_TAG: ${{ matrix.docker_tag }}
           MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
@@ -85,23 +88,23 @@ jobs:
       matrix:
         include:
           - docker_image: debian
-            docker_tag: '12'  # Latest possible because of migration from flavor-specific to any suite
+            docker_tag: "12" # Latest possible because of migration from flavor-specific to any suite
             experimental: false
 
           - docker_image: ubuntu
-            docker_tag: '24.04'
+            docker_tag: "24.04"
             experimental: false
 
     steps:
       - name: Check out the codebase
         uses: actions/checkout@v6
         with:
-          path: 'sebdanielsson.cloudflared'
+          path: sebdanielsson.cloudflared
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
-          activate-environment: "true"
+          activate-environment: true
 
       - name: Install dependencies
         run: uv pip install -r requirements.txt
@@ -110,7 +113,7 @@ jobs:
         run: molecule test -s migration
         continue-on-error: ${{ matrix.experimental }}
         env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
           MOLECULE_DOCKER_IMAGE: ${{ matrix.docker_image }}
           MOLECULE_DOCKER_TAG: ${{ matrix.docker_tag }}

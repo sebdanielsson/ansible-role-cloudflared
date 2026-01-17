@@ -4,14 +4,14 @@
 name: Release
 permissions:
   contents: read
-'on':
+on:
   push:
     tags:
-      - '*'
+      - "*"
 
 defaults:
   run:
-    working-directory: 'sebdanielsson.cloudflared'
+    working-directory: "sebdanielsson.cloudflared"
 
 jobs:
   release:
@@ -21,12 +21,12 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v6
         with:
-          path: 'sebdanielsson.cloudflared'
+          path: "sebdanielsson.cloudflared"
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version-file: '.python-version'
+          python-version-file: ".python-version"
 
       - name: Install Ansible
         run: pip install -r requirements.txt

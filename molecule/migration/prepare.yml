@@ -34,6 +34,6 @@
       ansible.builtin.assert:
         that:
           - '"Suites: any" not in (deprecated_repo.content | b64decode)'
-          - 'ansible_distribution_release in (deprecated_repo.content | b64decode)'
+          - "ansible_distribution_release in (deprecated_repo.content | b64decode)"
         fail_msg: "Deprecated repository was not set up correctly"
         success_msg: "Deprecated repository with flavor-specific suite created successfully"

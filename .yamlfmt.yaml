@@ -1,0 +1,19 @@
+---
+#  Yamlfmt configuration file
+#  For more details, see:
+#  https://github.com/google/yamlfmt/blob/main/docs/config-file.md
+match_type: doublestar
+include:
+  - "**/*.yaml"
+exclude:
+  - "**/flux-system/**"
+  - ".venv/**"
+line_ending: lf
+formatter:
+  type: basic
+  include_document_start: true
+  indent: 2
+  retain_line_breaks_single: true
+  eof_newline: true
+  force_quote_style: double
+  force_array_style: block
