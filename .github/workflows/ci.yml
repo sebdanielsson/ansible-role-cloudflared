@@ -28,8 +28,9 @@ jobs:
           setup_python: true
           requirements_file: requirements.yml
 
-      - name: Run format check
-        run: npx oxfmt --check
+      - name: yamlfmt
+        run: |
+          go run github.com/google/yamlfmt/cmd/yamlfmt@main -conf .yamlfmt.yaml -lint
 
   molecule:
     name: Molecule Test
