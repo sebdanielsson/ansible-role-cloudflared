@@ -35,7 +35,3 @@
     name: cloudflared
     update_cache: true
     state: present
-  register: cloudflared_install
-  retries: 3
-  delay: 15
-  until: cloudflared_install is succeeded
