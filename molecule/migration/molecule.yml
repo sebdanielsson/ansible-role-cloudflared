@@ -15,6 +15,7 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
+    create: ../default/create.yml
     converge: converge.yml
     prepare: prepare.yml
     verify: verify.yml
