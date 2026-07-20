@@ -24,7 +24,7 @@ jobs:
           path: "sebdanielsson.cloudflared"
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7.0.0
         with:
           python-version-file: ".python-version"
 
