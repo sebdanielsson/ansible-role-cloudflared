@@ -33,14 +33,15 @@ jobs:
     runs-on: ubuntu-24.04-arm
     permissions:
       contents: read
-    defaults:
-      run:
-        working-directory: "sebdanielsson.cloudflared"
+    # The old publish.yml checked out into a "sebdanielsson.cloudflared" subdirectory (inherited
+    # from geerlingguy's template, where the directory name matters for local ansible-galaxy
+    # operations). `ansible-galaxy role import` only tells Galaxy to fetch from GitHub by
+    # owner/repo, so the checkout layout is irrelevant to it — and the subdirectory actively broke
+    # `python-version-file`, which action inputs resolve against the workspace root, not the
+    # working-directory default. Plain checkout instead.
     steps:
       - name: Check out the codebase
         uses: actions/checkout@v7
-        with:
-          path: "sebdanielsson.cloudflared"
 
       - name: Set up Python
         uses: actions/setup-python@v7.0.0
