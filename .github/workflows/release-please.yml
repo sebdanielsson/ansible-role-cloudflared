@@ -1,0 +1,56 @@
+---
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+# Release Please maintains a "release PR" that bumps CHANGELOG.md from conventional commits.
+# Merging it creates the tag + GitHub release. The Galaxy import runs in the SAME workflow run,
+# gated on `release_created`, because tags pushed with GITHUB_TOKEN do not trigger workflows —
+# a separate `on: push: tags` workflow would never fire.
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - name: Run Release Please
+        id: release
+        uses: googleapis/release-please-action@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: "sebdanielsson.cloudflared"
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v7
+        with:
+          path: "sebdanielsson.cloudflared"
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install Ansible
+        run: pip install -r requirements.txt
+
+      - name: Publish to Ansible Galaxy
+        run: >-
+          ansible-galaxy role import --api-key ${{ secrets.GALAXY_API_KEY }}
+          $(echo ${{ github.repository }} | cut -d/ -f1) $(echo ${{ github.repository }} | cut -d/ -f2)
