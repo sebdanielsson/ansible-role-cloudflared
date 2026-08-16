@@ -1,0 +1,31 @@
+---
+name: Lint PR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+# PRs here are squash-merged, so the PR title becomes the commit on main — and that is the string
+# Release Please parses for the version bump and changelog. A non-conventional title doesn't fail
+# anything, it just silently produces no release, which is easy to miss. This makes it a red check.
+#
+# validateSingleCommit is on because the repo's squash title setting is COMMIT_OR_PR_TITLE: for a
+# PR with exactly one commit GitHub uses that commit's message as the squash title instead of the
+# PR title, so the commit has to be conventional too.
+jobs:
+  title:
+    name: Validate PR title
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v6.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          validateSingleCommit: true
